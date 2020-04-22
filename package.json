@@ -1,22 +1,22 @@
 {
-  "name": "iobroker.template",
+  "name": "iobroker.residents",
   "version": "0.0.1",
-  "description": "Template for adapter development",
+  "description": "Provides an adapter to represent a group of individuals living at your home.",
   "author": {
-    "name": "Author",
-    "email": "author@mail.com"
+    "name": "Volker Vitt",
+    "email": "vvitt@yahoo.com"
   },
-  "homepage": "https://github.com/Author/ioBroker.template",
+  "homepage": "https://github.com/vvitt69/ioBroker.residents",
   "license": "MIT",
   "keywords": [
     "ioBroker",
-    "template",
     "Smart Home",
-    "home automation"
+    "home automation",
+    "smarthome"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Author/ioBroker.template"
+    "url": "https://github.com/vvitt69/ioBroker.residents"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.3.1"
@@ -51,7 +51,7 @@
     "lint": "eslint"
   },
   "bugs": {
-    "url": "https://github.com/Author/ioBroker.template/issues"
+    "url": "https://github.com/vvitt69/ioBroker.residents/issues"
   },
   "readmeFilename": "README.md"
 }

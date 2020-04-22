@@ -1,48 +1,24 @@
 {
     "common": {
-        "name": "template",
+        "name": "residents",
         "version": "0.0.1",
         "news": {
             "0.0.1": {
                 "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "de": "Erstveröffentlichung"
             }
         },
-        "title": "Template (JavaScript with VIS)",
+        "title": "Residents",
         "titleLang": {
-            "en": "Template (JavaScript with VIS)",
-            "de": "Vorlage (JavaScript mit VIS)",
-            "ru": "Шаблон (JavaScript с VIS)",
-            "pt": "Modelo (JavaScript com VIS)",
-            "nl": "Sjabloon (JavaScript met VIS)",
-            "fr": "Modèle (JavaScript avec VIS)",
-            "it": "Modello (JavaScript con VIS)",
-            "es": "Plantilla (JavaScript con VIS)",
-            "pl": "Szablon (JavaScript z VIS)",
-            "zh-cn": "模板（JavaScript和VIS）"
+            "en": "Residents",
+            "de": "Bewohner"
         },
         "desc": {
-            "en": "Template for adapter development",
-            "de": "Vorlage für die Adapterentwicklung",
-            "ru": "Шаблон для разработки адаптера",
-            "pt": "Modelo para desenvolvimento de adaptadores",
-            "nl": "Sjabloon voor adapterontwikkeling",
-            "fr": "Modèle de développement d'adaptateur",
-            "it": "Modello per lo sviluppo dell'adattatore",
-            "es": "Plantilla para desarrollo de adaptadores",
-            "pl": "Szablon do opracowania adaptera",
-            "zh-cn": "适配器开发的模板"
+            "en": "Provides an adapter to represent a group of individuals living at your home.",
+            "de": "Stellt einen Adapter bereit, um eine Gruppe von Personen zu repräsentieren, die zusammen wohnen."
         },
         "authors": [
-            "Author <author@mail.com>"
+            "Volker Vitt <vvitt@yahoo.com>"
         ],
         "keywords": [
             "ioBroker",
@@ -53,10 +29,10 @@
         "license": "MIT",
         "platform": "Javascript/Node.js",
         "main": "main.js",
-        "icon": "template.png",
+        "icon": "residents.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/Author/ioBroker.template/master/admin/template.png",
-        "readme": "https://github.com/Author/ioBroker.template/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/vvitt69/ioBroker.residents/master/admin/residents.png",
+        "readme": "https://github.com/vvitt69/ioBroker.residents/blob/master/README.md",
         "loglevel": "info",
         "restartAdapters": [
             "vis"
@@ -70,16 +46,8 @@
         "adminTab": {
             "singleton": true,
             "name": {
-                "en": "Template (JavaScript with VIS)",
-                "de": "Vorlage (JavaScript mit VIS)",
-                "ru": "Шаблон (JavaScript с VIS)",
-                "pt": "Modelo (JavaScript com VIS)",
-                "nl": "Sjabloon (JavaScript met VIS)",
-                "fr": "Modèle (JavaScript avec VIS)",
-                "it": "Modello (JavaScript con VIS)",
-                "es": "Plantilla (JavaScript con VIS)",
-                "pl": "Szablon (JavaScript z VIS)",
-                "zh-cn": "模板（JavaScript和VIS）"
+                "en": "Residents",
+                "de": "Bewohner"
             },
             "link": "",
             "fa-icon": "info"
