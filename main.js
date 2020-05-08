@@ -1,26 +1,34 @@
 'use strict';
 
-/*
- * Created with @iobroker/create-adapter v1.24.1
- */
-
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require('@iobroker/adapter-core');
 
-// Load your modules here, e.g.:
-// const fs = require("fs");
+let stateEnum = new Array();
+ stateEnum[0] = {state:"none", val:0};
+ stateEnum[1] = {state:"gone", val:1};
+ stateEnum[2] = {state:"away", val:2};
+ stateEnum[3] = {state:"leaving", val:3};
+ stateEnum[4] = {state:"comming", val:4};
+ stateEnum[5] = {state:"around", val:5};
+ stateEnum[6] = {state:"inhouse", val:6};
+ stateEnum[7] = {state:"asleep", val:7};
+ stateEnum[8] = {state:"gotosleep", val:8};
+ stateEnum[9] = {state:"awoken", val:9};
+ stateEnum[10] = {state:"home", val:10};
 
-class Template extends utils.Adapter {
+if (Object.freeze)
+  Object.freeze(stateEnum);
 
-    /**
+class Residents extends utils.Adapter {
+      /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
      */
     constructor(options) {
         super({
             ...options,
-            name: 'template',
+            name: 'residents',
         });
+        this.allResidents = [];
+
         this.on('ready', this.onReady.bind(this));
         this.on('objectChange', this.onObjectChange.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -28,57 +36,73 @@ class Template extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
-    /**
-     * Is called when databases are connected and adapter received configuration.
-     */
     async onReady() {
-        // Initialize your adapter here
+        await this.setObjectNotExists('state', {
+          type: 'state',
+          common: {
+              name: 'state',
+              type: 'string',
+              role: 'value',
+              read: true,
+              write: true,
+          },
+          native: {},
+        });
+        await this.setStateAsync('state', 'gone');
 
-        // The adapters config (in the instance object everything under the attribute "native") is accessible via
-        // this.config:
-        this.log.info('config option1: ' + this.config.option1);
-        this.log.info('config option2: ' + this.config.option2);
-
-        /*
-        For every state in the system there has to be also an object of type state
-        Here a simple template for a boolean variable named "testVariable"
-        Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-        */
-        await this.setObjectAsync('testVariable', {
-            type: 'state',
-            common: {
-                name: 'testVariable',
-                type: 'boolean',
-                role: 'indicator',
-                read: true,
-                write: true,
-            },
-            native: {},
+        await this.setObjectNotExists(this.config.resident1 + '.name', {
+          type: 'state',
+          common: {
+              name: this.config.resident1,
+              type: 'string',
+              role: 'text',
+              read: true,
+              write: false,
+          },
+          native: {},
+        });
+        await this.setObjectNotExists(this.config.resident1 + '.state', {
+          type: 'state',
+          common: {
+              name: 'state',
+              type: 'string',
+              role: 'value',
+              read: true,
+              write: true,
+          },
+          native: {},
         });
 
-        // in this template all states changes inside the adapters namespace are subscribed
+        await this.setStateAsync(this.config.resident1 + '.name', {val: this.config.resident1, ack: true});
+        await this.setStateAsync(this.config.resident1 + '.state', 'gone');
+
+        await this.setObjectNotExists(this.config.resident2 + '.name', {
+          type: 'state',
+          common: {
+              name: this.config.resident2,
+              type: 'string',
+              role: 'text',
+              read: true,
+              write: false,
+          },
+          native: {},
+        });
+        await this.setObjectNotExists(this.config.resident2 + '.state', {
+          type: 'state',
+          common: {
+              name: 'state',
+              type: 'string',
+              role: 'value',
+              read: true,
+              write: true,
+          },
+          native: {},
+        });
+
+        await this.setStateAsync(this.config.resident2 + '.name', {val: this.config.resident2, ack: true});
+        await this.setStateAsync(this.config.resident2 + '.state', 'gone');
+
         this.subscribeStates('*');
-
-        /*
-        setState examples
-        you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-        */
-        // the variable testVariable is set to true as command (ack=false)
-        await this.setStateAsync('testVariable', true);
-
-        // same thing, but the value is flagged "ack"
-        // ack should be always set to true if the value is received from or acknowledged from the target system
-        await this.setStateAsync('testVariable', { val: true, ack: true });
-
-        // same thing, but the state is deleted after 30s (getState will return null afterwards)
-        await this.setStateAsync('testVariable', { val: true, ack: true, expire: 30 });
-
-        // examples for the checkPassword/checkGroup functions
-        let result = await this.checkPasswordAsync('admin', 'iobroker');
-        this.log.info('check user admin pw iobroker: ' + result);
-
-        result = await this.checkGroupAsync('admin', 'admin');
-        this.log.info('check group user admin group admin: ' + result);
     }
 
     /**
@@ -115,31 +139,54 @@ class Template extends utils.Adapter {
      * @param {ioBroker.State | null | undefined} state
      */
     onStateChange(id, state) {
+      if (id != this.namespace + '.state') { //no prcessing for overall state
         if (state) {
+            this.log.debug('Entered onStateChange processing with id: ' + id);
+            this.log.debug('and state.val: ' + state.val);
+            //this.log.debug('Entered onStateChange processing with id: ' + id);
             // The state was changed
-            this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-        } else {
-            // The state was deleted
-            this.log.info(`state ${id} deleted`);
+            if(stateEnum.find(item => item.state == state.val)){ // valid state given
+                //get the numeric value of the state
+                var newValue = 0;
+                stateEnum.forEach((item, i) => {
+                  if (state.val == item.state)
+                    newValue = item.val;
+                  });
+
+                  //asign the value to the resident in the array
+                  var found = this.allResidents.find(element => element.name === id); //check, if resistent is already in array
+                  if (found == undefined){ //not in: insert it
+                    this.allResidents.push({name: id, val:newValue});
+                  } else { //in: update it
+                    var index = this.allResidents.indexOf(found);
+                    this.allResidents[index] = {name: id, val:newValue};
+                }
+                //find highest value in array
+                var maxValue = 0;
+                this.allResidents.forEach((item, i) => {
+                  if(item.val > maxValue)
+                    maxValue = item.val; //stateEnum
+                  });
+                //set overall stateEnum
+                this.setStateAsync('state', stateEnum[maxValue].state);
+
+                //debug results
+                this.allResidents.forEach((item, i) => {
+                  this.log.debug(item.name + ' is ' + item.val);
+                  });
+                this.log.debug('max Value is ' + maxValue);
+
+                } else { //invalid state given
+                this.log.warn(state.val + ' is not a valid value for a residents state. Switching to gone');
+                this.setStateAsync(id,'gone');
+            }
+
+          } else {
+              // The state was deleted
+              this.log.info(`state ${id} deleted`);
+          }
         }
     }
-
-    // /**
-    //  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-    //  * Using this method requires "common.message" property to be set to true in io-package.json
-    //  * @param {ioBroker.Message} obj
-    //  */
-    // onMessage(obj) {
-    // 	if (typeof obj === 'object' && obj.message) {
-    // 		if (obj.command === 'send') {
-    // 			// e.g. send email or pushover or whatever
-    // 			this.log.info('send command');
-
-    // 			// Send response in callback if required
-    // 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-    // 		}
-    // 	}
-    // }
 
 }
 
@@ -149,8 +196,8 @@ if (module.parent) {
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
      */
-    module.exports = (options) => new Template(options);
+    module.exports = (options) => new Residents(options);
 } else {
     // otherwise start the instance directly
-    new Template();
+    new Residents();
 }

@@ -1,6 +1,6 @@
 {
   "name": "iobroker.residents",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Provides an adapter to represent a group of individuals living at your home.",
   "author": {
     "name": "Volker Vitt",

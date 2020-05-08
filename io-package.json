@@ -1,17 +1,21 @@
 {
     "common": {
         "name": "residents",
-        "version": "0.0.1",
+        "version": "0.1.0",
         "news": {
-            "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung"
-            }
+          "0.0.1": {
+              "en": "copy from template",
+              "de": "Kopie der Vorlage"
+          },
+          "0.1.0": {
+              "en": "initial release",
+              "de": "Erstveröffentlichung"
+          }
         },
         "title": "Residents",
         "titleLang": {
             "en": "Residents",
-            "de": "Bewohner"
+            "de": "Residents"
         },
         "desc": {
             "en": "Provides an adapter to represent a group of individuals living at your home.",
@@ -37,7 +41,6 @@
         "restartAdapters": [
             "vis"
         ],
-        "localLink": "%web_protocol%://%ip%:%web_port%/vis/edit.html",
         "mode": "daemon",
         "type": "general",
         "compact": true,
@@ -47,7 +50,7 @@
             "singleton": true,
             "name": {
                 "en": "Residents",
-                "de": "Bewohner"
+                "de": "Residents"
             },
             "link": "",
             "fa-icon": "info"
@@ -61,8 +64,8 @@
         ]
     },
     "native": {
-        "option1": true,
-        "option2": "42"
+        "resident1": "Resident 1",
+        "resident2": "Resident 2"
     },
     "objects": [],
     "instanceObjects": []
