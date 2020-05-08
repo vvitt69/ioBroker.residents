@@ -18,10 +18,10 @@ The overall state of the adapter is always the highest state of all residents. T
 ## Changelog
 
 ### 0.1.0
-* (vvitt) initial release for two residents only
+* (vvitt69) initial release for two residents only
 
 ### 0.0.1
-* (vvitt) copy of template
+* (vvitt69) copy of template
 
 ## License
 MIT License
