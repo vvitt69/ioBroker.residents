@@ -17,6 +17,9 @@ The overall state of the adapter is always the highest state of all residents. T
 
 ## Changelog
 
+### 1.0.0
+* (vvitt69) change to ES6
+
 ### 0.1.0
 * (vvitt69) initial release for two residents only
 

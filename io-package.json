@@ -1,72 +1,78 @@
 {
-    "common": {
-        "name": "residents",
-        "version": "0.1.0",
-        "news": {
-          "0.0.1": {
-              "en": "copy from template",
-              "de": "Kopie der Vorlage"
-          },
-          "0.1.0": {
-              "en": "initial release",
-              "de": "Erstveröffentlichung"
-          }
-        },
-        "title": "Residents",
-        "titleLang": {
-            "en": "Residents",
-            "de": "Residents"
-        },
-        "desc": {
-            "en": "Provides an adapter to represent a group of individuals living at your home.",
-            "de": "Stellt einen Adapter bereit, um eine Gruppe von Personen zu repräsentieren, die zusammen wohnen."
-        },
-        "authors": [
-            "Volker Vitt <vvitt@yahoo.com>"
-        ],
-        "keywords": [
-            "ioBroker",
-            "template",
-            "Smart Home",
-            "home automation"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "main": "main.js",
-        "icon": "residents.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/vvitt69/ioBroker.residents/master/admin/residents.png",
-        "readme": "https://github.com/vvitt69/ioBroker.residents/blob/master/README.md",
-        "loglevel": "info",
-        "restartAdapters": [
-            "vis"
-        ],
-        "mode": "daemon",
-        "type": "general",
-        "compact": true,
-        "materialize": true,
-        "materializeTab": true,
-        "adminTab": {
-            "singleton": true,
-            "name": {
-                "en": "Residents",
-                "de": "Residents"
-            },
-            "link": "",
-            "fa-icon": "info"
-        },
-        "supportCustoms": true,
-        "dependencies": [
-            {
-                "js-controller": ">=1.4.2"
-            },
-            "vis"
-        ]
-    },
-    "native": {
-        "resident1": "Resident 1",
-        "resident2": "Resident 2"
-    },
-    "objects": [],
-    "instanceObjects": []
+	"common": {
+		"name": "residents",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "Residents",
+		"titleLang": {
+			"en": "Residents",
+			"de": "Einwohner",
+			"ru": "Жители",
+			"pt": "Moradores",
+			"nl": "Bewoners",
+			"fr": "Résidents",
+			"it": "Residenti",
+			"es": "Residentes",
+			"pl": "Mieszkańcy",
+			"zh-cn": "居民"
+		},
+		"desc": {
+			"en": "An iobroker adapter to represent a group of individuals living at your home.",
+			"de": "Ein iobroker-Adapter zur Darstellung einer Gruppe von Personen, die bei Ihnen zu Hause leben.",
+			"ru": "Адаптер iobroker для представления группы лиц, проживающих в вашем доме.",
+			"pt": "Um adaptador iobroker para representar um grupo de indivíduos que vivem em sua casa.",
+			"nl": "Een iobroker-adapter om een ​​groep individuen te vertegenwoordigen die bij u thuis wonen.",
+			"fr": "Un adaptateur iobroker pour représenter un groupe d'individus vivant à votre domicile.",
+			"it": "Un adattatore iobroker per rappresentare un gruppo di persone che vivono a casa tua.",
+			"es": "Un adaptador de iobroker para representar a un grupo de personas que viven en su casa.",
+			"pl": "Adapter iobroker do reprezentowania grupy osób mieszkających w Twoim domu.",
+			"zh-cn": "一个 iobroker 适配器，用于代表居住在您家中的一群人。"
+		},
+		"authors": [
+			"vvitt69 <vvitt@yahoo.com>"
+		],
+		"keywords": [
+			"smarthome",
+			"geofencing",
+			"presence"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "residents.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/vvitt69/ioBroker.residents/master/admin/residents.png",
+		"readme": "https://github.com/vvitt69/ioBroker.residents/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "iot-systems",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "push",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=2.0.0"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": []
 }
